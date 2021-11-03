@@ -14,6 +14,7 @@
     <% @publications.each do |publication| %>
       <tr>
         <td>
+        <%= publication.user.name %><br>
         <img
         src="<%= publication.image %>"
         class="img-fluid rounded-circle"
@@ -21,10 +22,14 @@
         style="height: 330px; width: 500px; margin-top: 30px;"
       /><br><br>
       <h4>Content</h4>
-      <%= publication.content %><br>
-      <%= link_to 'Show', publication %> ||
-      <%= link_to 'Edit', edit_publication_path(publication) %> ||
-      <%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= publication.content %><br> 
+      <% if publication.user_id == current_user.id %>
+          <%= link_to 'Show', publication %>||
+          <%= link_to 'Edit', edit_publication_path(publication) %> ||
+          <%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% else %>
+          <%= link_to 'Show', publication %>
+        <% end %>
       </td>
        
       </tr>
