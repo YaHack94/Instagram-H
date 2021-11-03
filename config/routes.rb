@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :publications
   get 'sessions/new'
   root to: "users#index"
   resources :sessions, only: [:new, :create, :destroy]
