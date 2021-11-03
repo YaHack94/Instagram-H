@@ -5,8 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>Image</th>
-      <th>Content</th>
+      <th></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,11 +13,20 @@
   <tbody>
     <% @publications.each do |publication| %>
       <tr>
-        <td><%= publication.image %></td>
-        <td><%= publication.content %></td>
-        <td><%= link_to 'Show', publication %></td>
-        <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
-        <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+        <img
+        src="<%= publication.image %>"
+        class="img-fluid rounded-circle"
+        alt=""
+        style="height: 330px; width: 500px; margin-top: 30px;"
+      /><br><br>
+      <h4>Content</h4>
+      <%= publication.content %><br>
+      <%= link_to 'Show', publication %> ||
+      <%= link_to 'Edit', edit_publication_path(publication) %> ||
+      <%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
+       
       </tr>
     <% end %>
   </tbody>
