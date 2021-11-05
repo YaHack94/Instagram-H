@@ -1,26 +1,21 @@
 class PublicationsController < ApplicationController
   before_action :set_publication, only: %i[ show edit update destroy ]
 
-  # GET /publications or /publications.json
   def index
     @publications = Publication.all
   end
 
-  # GET /publications/1 or /publications/1.json
   def show
     @favorite = current_user.favorites.find_by(publication_id: @publication.id)
   end
 
-  # GET /publications/new
   def new
     @publication = Publication.new
   end
 
-  # GET /publications/1/edit
   def edit
   end
 
-  # POST /publications or /publications.json
   def create
     @publication = Publication.new(publication_params)
     @publication.user_id = current_user.id
@@ -37,7 +32,6 @@ class PublicationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /publications/1 or /publications/1.json
   def update
     respond_to do |format|
       if @publication.update(publication_params)
@@ -50,7 +44,6 @@ class PublicationsController < ApplicationController
     end
   end
 
-  # DELETE /publications/1 or /publications/1.json
   def destroy
     @publication.destroy
     respond_to do |format|
@@ -59,15 +52,12 @@ class PublicationsController < ApplicationController
     end
   end
 
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_publication
-      @publication = Publication.find(params[:id])
-    end
+  def set_publication
+    @publication = Publication.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def publication_params
-      params.require(:publication).permit(:image, :content)
-    end
+  def publication_params
+    params.require(:publication).permit(:image, :content)
+  end
 end
