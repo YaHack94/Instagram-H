@@ -3,6 +3,7 @@ class PublicationsController < ApplicationController
 
   def index
     @publications = Publication.all
+    @users = User.all
   end
 
   def show
@@ -30,6 +31,10 @@ class PublicationsController < ApplicationController
         format.json { render json: @publication.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def confirm
+    @publication = Publication.new(publication_params)
   end
 
   def update
