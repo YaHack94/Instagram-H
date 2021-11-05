@@ -22,7 +22,7 @@ class PublicationsController < ApplicationController
 
     respond_to do |format|
       if @publication.save
-        PublicationMailer.published_mail(@publication).deliver
+        #PublicationMailer.published_mail(@publication).deliver
         format.html { redirect_to @publication, notice: "Publication was successfully created." }
         format.json { render :show, status: :created, location: @publication }
       else
