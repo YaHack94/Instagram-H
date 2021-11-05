@@ -7,6 +7,6 @@ class User < ApplicationRecord
     has_secure_password
     validates :password, length: { minimum: 6 }
     has_many :publications
-    mount_uploader :image, ImageUploader
+    #mount_uploader :image, ImageUploader
     has_many :favorites, dependent: :destroy
 end

@@ -15,6 +15,7 @@ gem 'bootstrap'
 gem 'jquery'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'dotenv-rails' 
+gem 'faker'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
