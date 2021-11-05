@@ -15,5 +15,13 @@
   <%= @publication.content %>
 </p>
 
-<%= link_to 'Edit', edit_publication_path(@publication) %> |
+<% unless @publication.user_id == current_user.id %>
+  <% if @favorite.present? %>
+    <%= link_to 'Remove favorite', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>||
+  <% else %>
+    <%= link_to 'Favorite', favorites_path(publication_id: @publication.id), method: :post, class: 'btn btn-primary' %>||
+  <% end %>
+<% end %>
+<%= link_to 'Edit', edit_publication_path(@publication) %> ||
 <%= link_to 'Back', publications_path %>
+

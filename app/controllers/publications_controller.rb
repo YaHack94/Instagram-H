@@ -8,6 +8,7 @@ class PublicationsController < ApplicationController
 
   # GET /publications/1 or /publications/1.json
   def show
+    @favorite = current_user.favorites.find_by(publication_id: @publication.id)
   end
 
   # GET /publications/new
@@ -57,6 +58,7 @@ class PublicationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

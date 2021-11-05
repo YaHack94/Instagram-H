@@ -1,8 +1,12 @@
 <%= form_with(model: user, local: true) do |form| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
+      <h2>
+        <%= 
+          t("errors.template.header.one", model: user.model_name.human) if user.errors.count == 1
+          t("errors.template.header.other", model: user.model_name.human, count: user.errors.count) if user.errors.count > 1
+        %>
+      </h2>
       <ul>
         <% user.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -14,23 +18,23 @@
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
-  </div>
+  </div><br>
   <div class="field">
     <%= form.label :image %>
     <%= form.file_field :image %>
-  </div>
+  </div><br>
 
   <div class="field">
     <%= form.label :email %>
     <%= form.text_field :email %>
-  </div>
+  </div><br>
 
   <div class="field">
     <%= form.label :password %>
     <%= form.password_field :password %>
-  </div>
+  </div><br>
 
   <div class="actions">
     <%= form.submit %>
-  </div>
+  </div><br>
 <% end %>
