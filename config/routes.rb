@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
   resources :favorites, only: [:create, :destroy]
-
   resources :publications do
     collection do
       post :confirm
     end
   end
-  
   get 'sessions/new'
   root to: "users#index"
   resources :sessions, only: [:new, :create, :destroy]

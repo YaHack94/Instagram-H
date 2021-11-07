@@ -18,23 +18,27 @@ class PublicationsController < ApplicationController
   end
 
   def create
-    @publication = Publication.new(publication_params)
-    @publication.user_id = current_user.id
-
-    respond_to do |format|
-      if @publication.save
-        #PublicationMailer.published_mail(@publication).deliver
-        format.html { redirect_to @publication, notice: "Publication was successfully created." }
-        format.json { render :show, status: :created, location: @publication }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @publication.errors, status: :unprocessable_entity }
+    @publication = current_user.publications.build(publication_params)
+    #@publication.user_id = current_user.id
+    if params[:back]
+      render :new
+    else
+      respond_to do |format|
+        if @publication.save
+          #PublicationMailer.published_mail(@publication).deliver
+          format.html { redirect_to @publication, notice: "Publication was successfully created." }
+          format.json { render :show, status: :created, location: @publication }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @publication.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
 
   def confirm
-    @publication = Publication.new(publication_params)
+    @publication = current_user.publications.build(publication_params)
+    render :new if @publication.invalid?
   end
 
   def update
@@ -63,6 +67,6 @@ class PublicationsController < ApplicationController
   end
 
   def publication_params
-    params.require(:publication).permit(:image, :content)
+    params.require(:publication).permit(:image, :image_cache, :content)
   end
 end
